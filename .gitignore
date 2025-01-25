@@ -1,20 +1,16 @@
 # Node.js dependencies
 node_modules/
 
-# Environment variables (never commit sensitive data)
+# Environment variables
 .env
-
-# TypeScript build output
-/dist/
-/build/
 
 # Log files
 npm-debug.log
 yarn-debug.log
 yarn-error.log
 
-# TypeScript map files (optional but usually ignored)
-*.tsbuildinfo
+# TypeScript build output
+/dist/
 
 # VS Code settings (if you don't want to share your editor config)
 .vscode/
@@ -22,9 +18,3 @@ yarn-error.log
 # OS-specific files
 .DS_Store    # macOS
 Thumbs.db    # Windows
-
-# Logs
-*.log
-
-# Other
-package-lock.json # Optional if you want to manage it but you may prefer it committed for deterministic builds.
