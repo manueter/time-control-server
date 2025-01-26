@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "echo 'Build skipped; prebuilt files are used'",
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts"
   },
