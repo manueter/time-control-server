@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import {
   getClocks as getClocksModel,
-  addClock as addClockModel,
   getEntryTypes as getEntryTypesModel,
 } from "../models/clockModel";
 

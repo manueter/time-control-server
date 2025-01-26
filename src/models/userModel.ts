@@ -1,9 +1,4 @@
 import pool from '../config/db';
-const path = require("path");
-
-const filePath = path.join(__dirname, '../data/jsondb/users.json');
-const profilesFilePath = '../data/jsondb/profiles.json'; // Profiles file path
-
 // Define the structure of a user
 export interface User {
   uuid: string;

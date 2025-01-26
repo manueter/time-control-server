@@ -9,13 +9,6 @@ export interface Entry {
   time: string;
 }
 
-// export const getEntriesForUser = async (userUuid: string): Promise<Entry[]> => {
-//   const res = await pool.query("SELECT * FROM entries WHERE user_uuid = $1", [
-//     userUuid,
-//   ]);
-//   return res.rows;
-// };
-
 export const getEntriesForUser = async (
   userUuid: string,
   startDate?: string,
@@ -32,16 +25,7 @@ export const getEntriesForUser = async (
   const res = await pool.query(query, params);
   return res.rows;
 };
-// export const addEntry = async (
-//   userUuid: string,
-//   entryTypeId: number,
-//   clockId:number
-// ): Promise<void> => {
-//   await pool.query(
-//     "INSERT INTO entries (user_uuid, entry_type_id, clock_id, date, time) VALUES ($1, $2, $3, CURRENT_DATE, CURRENT_TIME)",
-//     [userUuid, entryTypeId, clockId]
-//   );
-// };
+
 export const addEntry = async (
   userUuid: string,
   entryTypeId: number,
@@ -60,8 +44,6 @@ export const addEntry = async (
 };
 export const getEntriesForUserByMonth = async (userUuid: string, month:number, year:number): Promise<Entry[]> => {
   
-  const date = new Date(year, month);
-
   const res = await pool.query("SELECT * FROM entries WHERE user_uuid = $1 AND MONTH(date) = $2 AND YEAR(date) = $3", [
     userUuid, month, year
   ]);

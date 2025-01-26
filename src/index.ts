@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express, Response } from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import cors from 'cors';
@@ -10,7 +10,7 @@ import clockRoutes from "./routes/clockRoutes";
 import entryRoutes from "./routes/entryRoutes";
 
 const app: Express = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT ?? 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -23,11 +23,11 @@ app.use('/entries',entryRoutes)
 app.use('/clocks', clockRoutes);
 
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', ( res: Response) => {
   res.send('Hello, TimeControl Api is running!');
 });
 
-app.use((err: any, req: Request, res: Response, next: Function) => {
+app.use((err: any, res: Response) => {
   console.error(err.stack);
   res.status(500).send('Algo salio mal!');
 });
