@@ -9,7 +9,7 @@ const userModel_1 = require("../models/userModel");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const SECRET_KEY = process.env.SECRET_KEY ?? ''; // Use a more secure key in production
+const SECRET_KEY = process.env.S_KEY ?? '';
 // Function to validate input data
 const validateInput = (email, username, password) => {
     return !!(email ?? username) && !!password;

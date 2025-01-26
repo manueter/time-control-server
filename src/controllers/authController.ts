@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const SECRET_KEY = process.env.SECRET_KEY ??  '' // Use a more secure key in production
+const SECRET_KEY = process.env.S_KEY ?? ''
 
 // Function to validate input data
 const validateInput = (email?: string, username?: string, password?: string): boolean => {

@@ -1,7 +1,7 @@
   import { Pool } from 'pg';
 
   // Determine the correct configuration based on the environment
-  const isProduction = process.env.NODE_ENV === 'production';
+  const isProduction = true;
   
   const pool = new Pool(
     isProduction

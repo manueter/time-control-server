@@ -2,8 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
 // Secret key to sign JWT tokens
-const SECRET_KEY = 'your-secret-key'; // Change this to something more secure
-
+const SECRET_KEY = process.env.S_KEY ?? '';
 interface JwtPayload {
   user_uuid: string;
 }
