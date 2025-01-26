@@ -66,8 +66,9 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
 };
 
 // Logout user (Client-side)
-export const logoutUser = (req: Request, res: Response): void => {
+export const logoutUser = (_req: Request, res: Response): void => {
   // JWT-based authentication doesn't require server-side logout logic
+  //console.log(req);
   res.status(200).json({ message: 'User logged out successfully.' });
 };
 

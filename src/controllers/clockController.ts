@@ -4,12 +4,12 @@ import {
   getEntryTypes as getEntryTypesModel,
 } from "../models/clockModel";
 
-export const getServerTime = (req: Request, res: Response): void => {
+export const getServerTime = (_req: Request, res: Response): void => {
   const serverTime = new Date().toISOString();
   res.status(200).json({ serverTime });
 };
 
-export const getClocks = async (req: Request, res: Response) => {
+export const getClocks = async (_req: Request, res: Response) => {
   try {
     const clocks = await getClocksModel();
     res.status(200).json(clocks);
@@ -18,7 +18,7 @@ export const getClocks = async (req: Request, res: Response) => {
   }
 };
 
-export const getEntryTypes = async (req: Request, res: Response) => {
+export const getEntryTypes = async (_req: Request, res: Response) => {
   try {
     const entryTypes = await getEntryTypesModel();
     res.status(200).json(entryTypes);

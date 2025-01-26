@@ -30,11 +30,6 @@ export const getEntryTypes = async (): Promise<EntryType[]> => {
   return res.rows;
 };
 
-// export const getEntryTypesForClock = async (clockId: number): Promise<EntryType[]> => {
-//   const res = await pool.query('SELECT * FROM entry_types WHERE clock_id = $1', [clockId]);
-//   return res.rows;
-// };
-
 export const addEntryType = async (
   clockId: number,
   value: string,

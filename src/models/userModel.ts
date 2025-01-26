@@ -18,8 +18,6 @@ export interface Profile {
 
 export const getUsers = async (): Promise<User[]> => {
 
-  console.log(process.env.NODE_ENV);
-  console.log(process.env.DB_PASSWORD);
   const res = await pool.query('SELECT * FROM users');
   return res.rows;
 };
