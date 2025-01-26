@@ -14,6 +14,7 @@ export const getClocks = async (_req: Request, res: Response) => {
     const clocks = await getClocksModel();
     res.status(200).json(clocks);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Failed to fetch clocks." });
   }
 };

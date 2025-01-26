@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.authenticateToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 // Secret key to sign JWT tokens
-const SECRET_KEY = process.env.S_KEY ?? '1c25f308d122ec5f438673a2479f163932c038bc7b0288ee21f50a347f78cd0d';
+const SECRET_KEY = process.env.S_KEY ?? '';
 // Middleware to check if the request has a valid JWT
 const authenticateToken = (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', ''); // Get token from the Authorization header

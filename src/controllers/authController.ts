@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const SECRET_KEY = process.env.S_KEY ?? '1c25f308d122ec5f438673a2479f163932c038bc7b0288ee21f50a347f78cd0d'
+const SECRET_KEY = process.env.S_KEY ?? ''
 
 // Function to validate input data
 const validateInput = (email?: string, username?: string, password?: string): boolean => {
@@ -52,7 +52,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
 
     // Generate a JWT token
     const token = jwt.sign({ user_uuid: user.uuid }, SECRET_KEY, { expiresIn: '1h' });
-
+    console.log(token);
     // Send the response with the token
     res.status(200).json({
       message: 'Login successful!',

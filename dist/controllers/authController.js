@@ -9,7 +9,7 @@ const userModel_1 = require("../models/userModel");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const SECRET_KEY = process.env.S_KEY ?? '1c25f308d122ec5f438673a2479f163932c038bc7b0288ee21f50a347f78cd0d';
+const SECRET_KEY = process.env.S_KEY ?? '';
 // Function to validate input data
 const validateInput = (email, username, password) => {
     return !!(email ?? username) && !!password;
@@ -47,6 +47,7 @@ const loginUser = async (req, res) => {
         }
         // Generate a JWT token
         const token = jsonwebtoken_1.default.sign({ user_uuid: user.uuid }, SECRET_KEY, { expiresIn: '1h' });
+        console.log(token);
         // Send the response with the token
         res.status(200).json({
             message: 'Login successful!',

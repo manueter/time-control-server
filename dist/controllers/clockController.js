@@ -13,6 +13,7 @@ const getClocks = async (_req, res) => {
         res.status(200).json(clocks);
     }
     catch (error) {
+        console.log(error);
         res.status(500).json({ message: "Failed to fetch clocks." });
     }
 };
