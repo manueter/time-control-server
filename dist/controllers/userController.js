@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerUser = void 0;
 const userModel_1 = require("../models/userModel");
 const hashUtils_1 = require("../utils/hashUtils");
-// Register a user without profile
 const registerUser = async (req, res) => {
     const { username, password } = req.body;
     let exists = await (0, userModel_1.userExists)(username);

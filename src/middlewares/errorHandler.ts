@@ -1,4 +1,3 @@
-// src/middlewares/errorHandler.ts
 import {Response } from 'express';
 
 export const errorHandler = (

@@ -6,9 +6,8 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const SECRET_KEY = process.env.S_KEY ?? ''
+const SECRET_KEY = process.env.SECRET_KEY ?? ''
 
-// Function to validate input data
 const validateInput = (email?: string, username?: string, password?: string): boolean => {
   return !!(email ?? username) && !!password;
 };
@@ -26,23 +25,20 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
   const { email, username, password } = req.body;
 
   try {
-    // Validate input data
+
     if (!validateInput(email, username, password)) {
       res.status(400).json({ message: 'Email/username and password are required.' });
       return;
     }
 
-    // Get users
     const usersData = await getUsers();
     const user = findUser(usersData, email, username);
 
-    // Check if the user exists
     if (!user) {
       res.status(400).json({ message: 'Invalid email/username or password.' });
       return;
     }
 
-    // Compare the provided password with the hashed password
     const isPasswordValid = await comparePassword(password, user.password);
 
     if (!isPasswordValid) {
@@ -50,10 +46,8 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    // Generate a JWT token
     const token = jwt.sign({ user_uuid: user.uuid }, SECRET_KEY, { expiresIn: '1h' });
-    console.log(token);
-    // Send the response with the token
+
     res.status(200).json({
       message: 'Login successful!',
       token,
@@ -65,10 +59,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// Logout user (Client-side)
 export const logoutUser = (_req: Request, res: Response): void => {
-  // JWT-based authentication doesn't require server-side logout logic
-  //console.log(req);
   res.status(200).json({ message: 'User logged out successfully.' });
 };
 
@@ -82,17 +73,11 @@ export const refreshToken = (req: Request, res: Response): void => {
   }
 
   try {
-    // Verify the expired token
-    const decoded = jwt.verify(token, SECRET_KEY, { ignoreExpiration: true }); // Allow expired tokens
-
-    // Check if the decoded payload contains the required data
+    const decoded = jwt.verify(token, SECRET_KEY, { ignoreExpiration: true }); 
     if (!decoded || typeof decoded !== "object" || !decoded.user_uuid) {
       throw new Error("Invalid token payload");
     }
-
-    // Issue a new token with the same payload
     const newToken = jwt.sign({ user_uuid: decoded.user_uuid }, SECRET_KEY, { expiresIn: "1h" });
-
     res.status(200).json({ token: newToken });
   } catch (error) {
     console.error("Error refreshing token:", error);

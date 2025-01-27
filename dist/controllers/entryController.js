@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getEntries = exports.createEntry = void 0;
 const entryModel_1 = require("../models/entryModel");
-// Add a new entry
 const createEntry = async (req, res) => {
     const { user_uuid, entry_type_id, clock_id } = req.body;
     try {

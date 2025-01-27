@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { addEntry, getEntriesForUser } from "../models/entryModel";
 
-// Add a new entry
 export const createEntry = async (req: Request, res: Response): Promise<void> => {
   const { user_uuid, entry_type_id, clock_id } = req.body;
   try {

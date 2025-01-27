@@ -3,8 +3,6 @@ import { Request, Response } from 'express';
 import { addUser, userExists } from '../models/userModel';
 import { hashPassword } from '../utils/hashUtils';
 
-
-// Register a user without profile
   export const registerUser = async (req: Request, res: Response) => {
     const { username, password } = req.body;
     let exists = await userExists(username);
@@ -19,6 +17,5 @@ import { hashPassword } from '../utils/hashUtils';
       } catch (error) {
         res.status(500).json({ message: 'An error occurred while registering the user.' });
       }
-    }
-    
+    } 
   };

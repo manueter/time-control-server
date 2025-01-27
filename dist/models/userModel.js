@@ -16,7 +16,7 @@ const userExists = async (username) => {
 };
 exports.userExists = userExists;
 const addUser = async (username, password) => {
-    const uuid = crypto.randomUUID(); // Node.js 14.17+ or use `uuid` package
+    const uuid = crypto.randomUUID();
     await db_1.default.query('INSERT INTO users (uuid, username, password) VALUES ($1, $2, $3)', [uuid, username, password]);
     return uuid;
 };

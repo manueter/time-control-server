@@ -21,11 +21,11 @@ app.use('/users', userRoutes_1.default);
 app.use('/entries', entryRoutes_1.default);
 app.use('/clocks', clockRoutes_1.default);
 app.get('/', (_req, res) => {
-    res.send('Hello, TimeControl Api is running!');
+    res.send('TimeControl Api is running!');
 });
 app.use((_req, res) => {
-    res.status(500).send('Algo salio mal!'); // Sends the error response to the client
+    res.status(500).send('Algo salio malSomething went wrong!');
 });
 app.listen(port, () => {
-    console.log(`Servidor corriendo en http://localhost:${port}`);
+    console.log(`Server running on port:${port}`);
 });

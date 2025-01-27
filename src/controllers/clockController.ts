@@ -3,10 +3,11 @@ import {
   getClocks as getClocksModel,
   getEntryTypes as getEntryTypesModel,
 } from "../models/clockModel";
+import { convertToLocalTime } from "../utils/dateUtils";
 
 export const getServerTime = (_req: Request, res: Response): void => {
-  const serverTime = new Date().toISOString();
-  res.status(200).json({ serverTime });
+  const serverTime_Local = convertToLocalTime(new Date());
+  res.status(200).json({ serverTime_Local });
 };
 
 export const getClocks = async (_req: Request, res: Response) => {
@@ -14,7 +15,6 @@ export const getClocks = async (_req: Request, res: Response) => {
     const clocks = await getClocksModel();
     res.status(200).json(clocks);
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Failed to fetch clocks." });
   }
 };

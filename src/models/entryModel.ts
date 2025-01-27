@@ -31,12 +31,8 @@ export const addEntry = async (
   entryTypeId: number,
   clockId: number
 ): Promise<void> => {
-  // Get the current time in your desired local time zone (e.g., 'America/Argentina/Buenos_Aires')
-  const localTime = new Date();
-  const localTimeZone = 'America/Argentina/Buenos_Aires'; // Change to your country's time zone
-  const formattedTime = convertToLocalTime(localTime, localTimeZone);  // Use the utility function
-
-  // Insert the entry into the database with the local time
+  const formattedTime = convertToLocalTime(new Date());
+  
   await pool.query(
     "INSERT INTO entries (user_uuid, entry_type_id, clock_id, date, time) VALUES ($1, $2, $3, CURRENT_DATE, $4)",
     [userUuid, entryTypeId, clockId, formattedTime]

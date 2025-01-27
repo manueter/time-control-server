@@ -2,9 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getEntryTypes = exports.getClocks = exports.getServerTime = void 0;
 const clockModel_1 = require("../models/clockModel");
+const dateUtils_1 = require("../utils/dateUtils");
 const getServerTime = (_req, res) => {
-    const serverTime = new Date().toISOString();
-    res.status(200).json({ serverTime });
+    const serverTime_Local = (0, dateUtils_1.convertToLocalTime)(new Date());
+    res.status(200).json({ serverTime_Local });
 };
 exports.getServerTime = getServerTime;
 const getClocks = async (_req, res) => {
@@ -13,7 +14,6 @@ const getClocks = async (_req, res) => {
         res.status(200).json(clocks);
     }
     catch (error) {
-        console.log(error);
         res.status(500).json({ message: "Failed to fetch clocks." });
     }
 };

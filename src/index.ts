@@ -15,22 +15,19 @@ const port = process.env.PORT ?? 4500;
 app.use(cors());
 app.use(express.json());
 
-
 app.use('/login', authRoutes);
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/entries',entryRoutes)
 app.use('/clocks', clockRoutes);
 
-
 app.get('/', (_req: express.Request,res: express.Response) => {
-  res.send('Hello, TimeControl Api is running!');
+  res.send('TimeControl Api is running!');
  });
 
- 
 app.use((_req: express.Request,res: express.Response) => {
-  res.status(500).send('Algo salio mal!');  // Sends the error response to the client
+  res.status(500).send('Algo salio malSomething went wrong!'); 
 });
 app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
+  console.log(`Server running on port:${port}`);
 });

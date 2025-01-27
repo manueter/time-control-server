@@ -1,5 +1,5 @@
 import pool from '../config/db';
-// Define the structure of a user
+
 export interface User {
   uuid: string;
   username: string;
@@ -7,7 +7,6 @@ export interface User {
   password: string;
 }
 
-// Define the structure of a profile
 export interface Profile {
   user_uuid: string;
   work_schedule: object;
@@ -28,7 +27,7 @@ export const userExists = async (username: string): Promise<boolean> => {
 };
 
 export const addUser = async (username: string, password: string): Promise<string> => {
-  const uuid = crypto.randomUUID(); // Node.js 14.17+ or use `uuid` package
+  const uuid = crypto.randomUUID(); 
   await pool.query(
     'INSERT INTO users (uuid, username, password) VALUES ($1, $2, $3)',
     [uuid, username, password]
