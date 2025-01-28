@@ -6,7 +6,6 @@ import cors from 'cors';
 import userRoutes from './routes/userRoutes';
 import authRoutes from './routes/authRoutes';
 import clockRoutes from "./routes/clockRoutes";
-
 import entryRoutes from "./routes/entryRoutes";
 
 const app: Express = express();
@@ -15,7 +14,6 @@ const port = process.env.PORT ?? 4500;
 app.use(cors());
 app.use(express.json());
 
-app.use('/login', authRoutes);
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/entries',entryRoutes)
@@ -26,7 +24,7 @@ app.get('/', (_req: express.Request,res: express.Response) => {
  });
 
 app.use((_req: express.Request,res: express.Response) => {
-  res.status(500).send('Algo salio malSomething went wrong!'); 
+  res.status(500).send('Something went wrong!'); 
 });
 app.listen(port, () => {
   console.log(`Server running on port:${port}`);

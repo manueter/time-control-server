@@ -7,8 +7,8 @@ import {
 
 const router = express.Router();
 
-router.get("/server-time", getServerTime);
 router.get("/", getClocks);
+router.get("/server-time", getServerTime);
 router.get("/entry-types", getEntryTypes);
 
 export default router;

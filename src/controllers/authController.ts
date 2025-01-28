@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
 import { comparePassword } from '../utils/hashUtils';
-import { getUsers } from '../models/userModel';
+import { getUserCredential, getUsers } from '../models/userModel';
 import jwt from 'jsonwebtoken';
 
 import dotenv from 'dotenv';
 dotenv.config();
 
-const SECRET_KEY = process.env.SECRET_KEY ?? 'secret'
+const SECRET_KEY = process.env.SECRET_KEY ?? ''
 
-const validateInput = (email?: string, username?: string, password?: string): boolean => {
-  return !!(email ?? username) && !!password;
+const validateInput = (email?: string, password?: string): boolean => {
+  return !!email  && !!password;
 };
 
 const findUser = (users: any[], email?: string, username?: string) => {
@@ -22,24 +22,25 @@ const findUser = (users: any[], email?: string, username?: string) => {
 };
 
 export const loginUser = async (req: Request, res: Response): Promise<void> => {
-  const { email, username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
 
-    if (!validateInput(email, username, password)) {
+    if (!validateInput(email, password)) {
       res.status(400).json({ message: 'Email/username and password are required.' });
       return;
     }
 
     const usersData = await getUsers();
-    const user = findUser(usersData, email, username);
+    const user = findUser(usersData, email);
 
     if (!user) {
       res.status(400).json({ message: 'Invalid email/username or password.' });
       return;
     }
 
-    const isPasswordValid = await comparePassword(password, user.password);
+    const pwd = await getUserCredential(user.uuid);
+    const isPasswordValid = await comparePassword(password, pwd);
 
     if (!isPasswordValid) {
       res.status(400).json({ message: 'Invalid email/username or password.' });

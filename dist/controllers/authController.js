@@ -9,9 +9,9 @@ const userModel_1 = require("../models/userModel");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const SECRET_KEY = process.env.SECRET_KEY ?? 'secret';
-const validateInput = (email, username, password) => {
-    return !!(email ?? username) && !!password;
+const SECRET_KEY = process.env.SECRET_KEY ?? '';
+const validateInput = (email, password) => {
+    return !!email && !!password;
 };
 const findUser = (users, email, username) => {
     if (email) {
@@ -23,19 +23,20 @@ const findUser = (users, email, username) => {
     return null;
 };
 const loginUser = async (req, res) => {
-    const { email, username, password } = req.body;
+    const { email, password } = req.body;
     try {
-        if (!validateInput(email, username, password)) {
+        if (!validateInput(email, password)) {
             res.status(400).json({ message: 'Email/username and password are required.' });
             return;
         }
         const usersData = await (0, userModel_1.getUsers)();
-        const user = findUser(usersData, email, username);
+        const user = findUser(usersData, email);
         if (!user) {
             res.status(400).json({ message: 'Invalid email/username or password.' });
             return;
         }
-        const isPasswordValid = await (0, hashUtils_1.comparePassword)(password, user.password);
+        const pwd = await (0, userModel_1.getUserCredential)(user.uuid);
+        const isPasswordValid = await (0, hashUtils_1.comparePassword)(password, pwd);
         if (!isPasswordValid) {
             res.status(400).json({ message: 'Invalid email/username or password.' });
             return;
