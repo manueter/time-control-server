@@ -26,6 +26,10 @@ app.get('/', (_req: express.Request,res: express.Response) => {
 app.use((_req: express.Request,res: express.Response) => {
   res.status(500).send('Something went wrong!'); 
 });
+
+app.get("/ping", (req, res) => {
+  res.status(200).send("pong");
+});
 app.listen(port, () => {
   console.log(`Server running on port:${port}`);
 });
