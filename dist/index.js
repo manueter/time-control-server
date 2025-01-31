@@ -15,18 +15,19 @@ const app = (0, express_1.default)();
 const port = process.env.PORT ?? 4500;
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-app.use('/auth', authRoutes_1.default);
-app.use('/users', userRoutes_1.default);
-app.use('/entries', entryRoutes_1.default);
-app.use('/clocks', clockRoutes_1.default);
-app.get('/', (_req, res) => {
-    res.send('TimeControl Api is running!');
-});
-app.use((_req, res) => {
-    res.status(500).send('Something went wrong!');
+app.use("/auth", authRoutes_1.default);
+app.use("/users", userRoutes_1.default);
+app.use("/entries", entryRoutes_1.default);
+app.use("/clocks", clockRoutes_1.default);
+app.get("/", (_req, res) => {
+    res.send("TimeControl Api is running!");
 });
 app.get("/ping", (req, res) => {
     res.status(200).send("pong");
+});
+// Siempre al final
+app.use((_req, res) => {
+    res.status(500).send("Something went wrong!");
 });
 app.listen(port, () => {
     console.log(`Server running on port:${port}`);
