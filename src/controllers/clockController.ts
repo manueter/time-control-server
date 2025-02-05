@@ -3,10 +3,10 @@ import {
   getClocks as getClocksModel,
   getEntryTypes as getEntryTypesModel,
 } from "../models/clockModel";
-import { convertToLocalTime } from "../utils/dateUtils";
+import { convertToLocalDateTime } from "../utils/dateUtils";
 
 export const getServerTime = (_req: Request, res: Response): void => {
-  const serverTime_Local = convertToLocalTime(new Date());
+  const serverTime_Local = convertToLocalDateTime(new Date());
   res.status(200).json({ serverTime_Local });
 };
 

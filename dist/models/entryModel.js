@@ -18,8 +18,10 @@ const getEntriesForUser = async (userUuid, startDate, endDate) => {
 };
 exports.getEntriesForUser = getEntriesForUser;
 const addEntry = async (userUuid, entryTypeId, clockId) => {
-    const formattedTime = (0, dateUtils_1.convertToLocalTime)(new Date());
-    await db_1.default.query("INSERT INTO entries (user_uuid, entry_type_id, clock_id, date, time) VALUES ($1, $2, $3, CURRENT_DATE, $4)", [userUuid, entryTypeId, clockId, formattedTime]);
+    const localDateTime = (0, dateUtils_1.convertToLocalDateTime)(new Date());
+    // Extract date and time from formatted DateTime string
+    const [localDate, localTime] = localDateTime.split(" ");
+    await db_1.default.query("INSERT INTO entries (user_uuid, entry_type_id, clock_id, date, time) VALUES ($1, $2, $3, $4, $5)", [userUuid, entryTypeId, clockId, localDate, localTime]);
 };
 exports.addEntry = addEntry;
 const getEntriesForUserByMonth = async (userUuid, month, year) => {

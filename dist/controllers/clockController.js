@@ -4,7 +4,7 @@ exports.getEntryTypes = exports.getClocks = exports.getServerTime = void 0;
 const clockModel_1 = require("../models/clockModel");
 const dateUtils_1 = require("../utils/dateUtils");
 const getServerTime = (_req, res) => {
-    const serverTime_Local = (0, dateUtils_1.convertToLocalTime)(new Date());
+    const serverTime_Local = (0, dateUtils_1.convertToLocalDateTime)(new Date());
     res.status(200).json({ serverTime_Local });
 };
 exports.getServerTime = getServerTime;

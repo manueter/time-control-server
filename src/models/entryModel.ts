@@ -1,5 +1,5 @@
 import pool from "../config/db";
-import { convertToLocalTime } from '../utils/dateUtils';
+import { convertToLocalDateTime } from '../utils/dateUtils';
 
 export interface Entry {
   id: number;
@@ -31,11 +31,14 @@ export const addEntry = async (
   entryTypeId: number,
   clockId: number
 ): Promise<void> => {
-  const formattedTime = convertToLocalTime(new Date());
-  
+  const localDateTime = convertToLocalDateTime(new Date());
+
+  // Extract date and time from formatted DateTime string
+  const [localDate, localTime] = localDateTime.split(" ");
+
   await pool.query(
-    "INSERT INTO entries (user_uuid, entry_type_id, clock_id, date, time) VALUES ($1, $2, $3, CURRENT_DATE, $4)",
-    [userUuid, entryTypeId, clockId, formattedTime]
+    "INSERT INTO entries (user_uuid, entry_type_id, clock_id, date, time) VALUES ($1, $2, $3, $4, $5)",
+    [userUuid, entryTypeId, clockId, localDate, localTime]
   );
 };
 export const getEntriesForUserByMonth = async (userUuid: string, month:number, year:number): Promise<Entry[]> => {
